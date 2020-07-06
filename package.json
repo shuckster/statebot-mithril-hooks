@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "statebot-mithril-hooks",
   "description": "Mithril Hooks for Statebot.",
   "version": "1.0.0",
