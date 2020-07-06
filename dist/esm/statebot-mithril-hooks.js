@@ -1,7 +1,7 @@
 
 /*
  * Statebot Mithril Hooks
- * v1.0.0
+ * v1.0.1
  * https://shuckster.github.io/statebot/
  * License: ISC
  */
@@ -52,4 +52,4 @@ function useStatebotEvent(bot, eventName, ...args) {
 }
 
 export { useStatebot, useStatebotEvent, useStatebotFactory };
-//# sourceMappingURL=statebot-mithril-hooks.mjs.map
+//# sourceMappingURL=statebot-mithril-hooks.js.map
