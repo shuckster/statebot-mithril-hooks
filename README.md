@@ -150,6 +150,7 @@ To hook-into [onEvent](https://shuckster.github.io/statebot/#statebotfsmonevent)
 ```jsx
 import m from 'mithril'
 import { withHooks } from 'mithril-hooks'
+import { Statebot } from 'statebot'
 import {
   useStatebot,
   useStatebotEvent
