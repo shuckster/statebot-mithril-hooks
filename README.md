@@ -176,7 +176,8 @@ const LoadingButton = withHooks(props => {
     )
   )
 
-  // You can achieve the same with use useEffect:
+  // You can achieve the same with useEffect, and you
+  // get more control over the dependencies, too:
   useEffect(() => {
     const cleanupFn = bot.onExited('loading', () =>
       setTimeout(
