@@ -32,49 +32,70 @@ For hooking-into Statebots that have life-cycles independent of the components t
 
 ```jsx
 import m from 'mithril'
-import { withHooks } from 'mithril-hooks'
+import { withHooks as MithrilComponent } from 'mithril-hooks'
+
 import { Statebot } from 'statebot'
 import { useStatebot } from 'statebot-mithril-hooks'
 
-const loader$bot = Statebot('loader', {
+export const loadMachine = Statebot('loader', {
   chart: `
     idle ->
-      loading -> (loaded | failed) ->
+      waiting ->
+      loaded | failed ->
       idle
   `
 })
 
-loader$bot.performTransitions(({ Emit }) => ({
-  'idle -> loading': {
+loadMachine.performTransitions(({ emit }) => ({
+  'idle -> waiting': {
     on: 'start-loading',
-    then: () => setTimeout(Emit('load-success'), 1000)
+    then: () => {
+      // Fail half the time for this demo
+      const fail = Math.random() > 0.5
+      setTimeout(() => {
+        fail ? emit('error') : emit('success')
+      }, 1000)
+    }
   },
-  'loading -> loaded': {
-    on: 'load-success'
+  'waiting -> loaded': {
+    on: 'success'
   },
-  'loading -> failed': {
-    on: 'load-error'
+  'waiting -> failed': {
+    on: 'error'
   }
 }))
 
-const { Enter, Emit, inState } = loader$bot
+const { Enter, Emit, inState } = loadMachine
 
-const LoadingButton = withHooks(props => {
-  const state = useStatebot(loader$bot)
+const LoadingButton = MithrilComponent(() => {
+  const state = useStatebot(loadMachine)
 
-  return (
-    <button
-      className={state}
-      onClick={Emit('start-loading')}
-      disabled={inState('loading')}
-    >
-      {inState('idle', 'Load')}
-      {inState('loading', 'Please wait...')}
-      {inState('loaded', 'Done!')} ({state})
-    </button>
+  return m(
+    'button',
+    {
+      className: state,
+      onclick: Emit('start-loading'),
+      disabled: !inState('idle')
+    },
+    inState('idle', 'Load'),
+    inState('waiting', 'Please wait...'),
+    inState('loaded', 'Done!'),
+    inState('failed', 'Whoops!')
+  )
+})
+
+const ResetButton = MithrilComponent(() => {
+  return m(
+    'button',
+    {
+      onclick: Enter('idle')
+    },
+    'Reset'
   )
 })
 ```
+
+You can play around with this one in a [CodeSandbox](https://codesandbox.io/s/statebot-mithril-brvwl?file=/src/Loader.js).
 
 ## useStatebotFactory
 
