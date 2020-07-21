@@ -1,7 +1,7 @@
 {
   "name": "statebot-mithril-hooks",
   "description": "Mithril Hooks for Statebot.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Conan Theobald <statebot@conans.co.uk>",
   "license": "ISC",
   "main": "index.js",
