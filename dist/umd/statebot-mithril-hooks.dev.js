@@ -9,7 +9,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('mithril-hooks'), require('statebot')) :
   typeof define === 'function' && define.amd ? define(['exports', 'mithril-hooks', 'statebot'], factory) :
-  (global = global || self, factory(global.statebotMithrilHooks = {}, global.mithrilHooks, global.statebot));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.statebotMithrilHooks = {}, global.mithrilHooks, global.statebot));
 }(this, (function (exports, mithrilHooks, statebot) { 'use strict';
 
   function _objectWithoutPropertiesLoose(source, excluded) {
