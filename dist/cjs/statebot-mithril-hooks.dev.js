@@ -3,7 +3,7 @@
  * Statebot Mithril Hooks
  * v1.1.0
  * https://shuckster.github.io/statebot/
- * License: ISC
+ * License: MIT
  */
 
 'use strict';
