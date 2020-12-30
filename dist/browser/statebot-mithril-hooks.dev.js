@@ -186,6 +186,8 @@ var statebotMithrilHooks = (function (exports, mithrilHooks, statebot) {
   exports.useStatebotEvent = useStatebotEvent;
   exports.useStatebotFactory = useStatebotFactory;
 
+  Object.defineProperty(exports, '__esModule', { value: true });
+
   return exports;
 
 }({}, mithrilHooks, statebot));
